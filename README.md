@@ -2,6 +2,7 @@
 An example web app using flask and sqlite.
 
 Run these commands in terminal for installing project dependencies:
+
 `pip install flask, flask_sqlalchemy, flask_bcrypt`
 
 Run these commands in terminal to run it locally:
