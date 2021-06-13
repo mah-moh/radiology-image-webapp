@@ -1,20 +1,5 @@
-from flask import Flask, render_template, url_for, request, redirect, session, flash
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-
-# app initializqation
-app = Flask(__name__)
-
-# creating database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = "very_secret"
-db = SQLAlchemy(app)
-
-from models.user import *
-
-# initializing bcrypt
-bcrypt = Bcrypt(app)
+from app import *
+from app.models import *
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -45,10 +30,11 @@ def register():
         user = User(fname=fname, lname=lname, email=email, password=hashed_pw)
         db.session.add(user)
         db.session.commit()
+        return redirect('/')
 
     return render_template("register.html")
 
-@app.route('/home')
+@app.route('/home', methods=['POST', 'GET'])
 def home(): 
     try:
         if session['user']:
@@ -62,6 +48,3 @@ def home():
 def logout():
     session.clear()
     return redirect('/')
-
-if __name__ == "__main__":
-    app.run(debug=True)

@@ -1,0 +1,16 @@
+div{
+    display: flex;
+    justify-content: space-between;
+    background: black;
+    color: white;
+}
+
+button{
+    padding: auto;
+}
+
+.upload{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
