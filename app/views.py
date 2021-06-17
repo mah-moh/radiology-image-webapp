@@ -1,5 +1,6 @@
 from app import *
-from app.models import *
+from .models import *
+from .middlewares import *
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -48,3 +49,13 @@ def home():
 def logout():
     session.clear()
     return redirect('/')
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        if request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+                return redirect(request.url)
+    return render_template('upload.html')
