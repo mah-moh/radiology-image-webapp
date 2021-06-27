@@ -1,16 +1,21 @@
-div{
-    display: flex;
-    justify-content: space-between;
-    background: black;
+a{
+    text-decoration: none;
     color: white;
+    padding: 0rem 1rem;
 }
 
-button{
-    padding: auto;
-}
 
 .upload{
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+}
+
+#photo{
+    display: flex;
+    justify-content: space-around;
+}
+
+img{
+    padding: 1rem;
 }

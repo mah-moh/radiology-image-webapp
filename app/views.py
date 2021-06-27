@@ -40,7 +40,8 @@ def home():
     try:
         if session['user']:
             user = User.query.filter_by(id=session['user']).first()
-            return render_template("home.html", name=user.fname)
+            file_paths = Filepath.query.filter_by(user_id=session['user']).all() # query filepaths
+            return render_template("home.html", name=user.fname, file_paths=file_paths) # passing file_paths as a list
     except:
         flash("You have to login first!")
         return redirect("/")
@@ -56,6 +57,10 @@ def upload():
         if request.files:
             file = request.files['file']
             if file and allowed_file(file.filename):
+                user = User.query.filter_by(id=session['user']).first()
+                filepath = Filepath(path=file.filename, owener=user) #adding file name to db
+                db.session.add(filepath)
+                db.session.commit()
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-                return redirect(request.url)
+                return redirect('/home')
     return render_template('upload.html')

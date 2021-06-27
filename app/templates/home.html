@@ -7,10 +7,29 @@
 
 
 {% block content %}
+    <nav style="background: cadetblue; padding: 1rem;">
+        <ul style="display: flex; flex-direction: row; list-style: none; text-decoration: none;">
+            <li><a href="/">Home</a></li>
+            <li><a href="/upload">Upload files</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </nav>
     <div class="first-row">
         <h1>Hey, {{name}}</h1>
-        <button type="submit"><a href="/logout">Log out</a></button>
     </div>
 
-    <a href="/upload">Upload files</a>
+    <div id="photo">
+        {% for path in file_paths %}
+            <form method="POST">
+                <img 
+                src="../static/upload_files/{{path.path}}" 
+                alt="something" 
+                width="200"
+                height="200"
+                />
+                <br/>
+                <button type="submit">send</button>
+            </form>
+        {% endfor %}
+    </div>
 {% endblock %}

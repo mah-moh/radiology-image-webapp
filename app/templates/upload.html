@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='upload.css') }}" />
     <title>Upload</title>
 {% endblock %}
 
 {% block content %}
+    <nav style="background: cadetblue; padding: 1rem;">
+        <ul style="display: flex; flex-direction: row; list-style: none; text-decoration: none;">
+            <li><a href="/">Home</a></li>
+            <li><a href="/upload">Upload files</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </nav>
     <div id='flash'>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
