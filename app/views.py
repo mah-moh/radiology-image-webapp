@@ -64,3 +64,10 @@ def upload():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
                 return redirect('/home')
     return render_template('upload.html')
+
+@app.route('/home/delete/<filename>')
+def Delete(filename):
+    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    db.session.query(Filepath).filter(Filepath.path==filename).delete()
+    db.session.commit()
+    return redirect(url_for('home'))

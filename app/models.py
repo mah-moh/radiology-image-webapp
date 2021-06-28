@@ -12,3 +12,4 @@ class Filepath(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String(80), nullable=False)
     user_id = db.Column((db.Integer), db.ForeignKey("user.id")) # adding User.id as a foreign key
+    

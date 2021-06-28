@@ -20,16 +20,18 @@
 
     <div id="photo">
         {% for path in file_paths %}
-            <form method="POST">
+            <div>
                 <img 
                 src="../static/upload_files/{{path.path}}" 
                 alt="something" 
                 width="200"
                 height="200"
+                name={{path.path}}
                 />
                 <br/>
                 <button type="submit">send</button>
-            </form>
+                <button><a href="home/delete/{{path.path}}" style="color: black;">Delete</a></button>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
